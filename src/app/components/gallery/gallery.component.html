@@ -1,0 +1,14 @@
+<!-- <section class="gallery">
+</section> -->
+<div class="gallery">
+    <h2 class="gallery-title">Our Design <span>Gallery</span></h2>
+    <div class="gallery-grid">
+        <img class="gallery-img cursor-pointer" *ngFor="let image of images" [src]="image.src" [alt]="image.alt"
+            (click)="openModal(image.src)">
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="modal" *ngIf="selectedImage" (click)="closeModal()">
+        <img [src]="selectedImage" class="modal-content">
+    </div>
+</div>

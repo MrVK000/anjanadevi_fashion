@@ -1,0 +1,280 @@
+<div class="container w-full justify-content-center align-items-center flex flex-column">
+    <nav class="w-full flex justify-content-center align-items-center flex-column">
+        <div class="nav-wrapper flex justify-space-between">
+            <div class="logo-container flex align-items-center justify-content-center cursor-pointer">
+                <div class="logo-wrapper">
+                    <img class="logo" loading="lazy" src="../../../assets/logo/logo_1.jpeg" alt="Logo"
+                        (click)="windowReload()">
+                </div>
+            </div>
+            <div class="nav-options-container flex align-items-center justify-content-center">
+                <div class="nav-option w-full h-full flex justify-content-center align-items-center cursor-pointer"
+                    *ngFor="let item of navOptions;let i = index" [ngClass]="currentTab == i ? 'selected-tab' : '' "
+                    (click)="goToSection(item.section);currentTab = i">
+                    <a class="nav-option-link" [href]="item.section">{{item.label}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-nav-wrapper w-full">
+            <i class="fa-solid fa-bars mobile-nav-icon cursor-pointer" (click)="showMobileNav = !showMobileNav"></i>
+        </div>
+        <div class="mobile-nav-wrapper w-full" [@fadeInOut]="showMobileNav ? 'visible' : 'hidden'">
+            <div class="nav-mobile-options-container w-full flex flex-column align-items-center justify-content-center">
+                <!-- <ng-container *ngFor="let item of navOptions">
+                    <a class="nav-option cursor-pointer" [href]="item.section">{{item.label}}</a>
+                </ng-container> -->
+                <div class="nav-option w-full h-full flex justify-content-center align-items-center cursor-pointer"
+                    *ngFor="let item of navOptions;let i = index" [ngClass]="currentTab == i ? 'selected-tab' : '' "
+                    (click)="goToSection(item.section);currentTab = i; showMobileNav = false">
+                    <a class="nav-option-link" [href]="item.section">{{item.label}}</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- <p-drawer [(visible)]="visible" header="Drawer">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+        </p>
+    </p-drawer> -->
+    <!-- <button (click)="showMobileNav = !showMobileNav" icon="pi pi-arrow-right">click</button> -->
+
+
+
+    <div class="wrapper w-full flex flex-column justify-content-center">
+
+
+        <section id="home" class="flex align-items-center justify-content-center">
+            <div class="home-wrapper w-full h-full flex justify-content-center align-items-center blur">
+                <div class="section-wrapper">
+                    <p class="home-title">Design, Stitch, Shine – Your Fashion Journey Begins Now!</p>
+                    <p class="home-description">Step into the World of High Fashion & Creativity!</p>
+                    <div class="button-container">
+                        <button class=" home-explore-button button-animate" (click)="goToSection('#about')"><span
+                                class="span-animate">Explore</span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="flex align-items-center justify-content-center">
+            <div class="section-wrapper">
+
+                <div class="about-content-wrapper flex justify-content-center align-items-center">
+                    <div class="about-img-container">
+                        <img class="about-img" src="../../../assets/content images/about-img-1.jpg" alt="">
+                    </div>
+
+                    <div class="about-text-container">
+                        <!-- <img class="rotateme" src="../../../assets/logo/hero-icon.png" alt="icon"
+                            data-animation="zoomIn" data-delay="1s"> -->
+                        <h2>About Our Fashion Institute</h2>
+                        <p>
+                            Established with a passion for fashion, our institute has been shaping aspiring designers
+                            into
+                            professionals.
+                            We specialize in <strong>bridal blouse design</strong> and <strong>embroidery
+                                artistry</strong>,
+                            helping students master the craft.
+                        </p>
+                        <p class="achievement-paragraph">
+                            In <strong>2015</strong>, we proudly won the <em>National Fashion Competition</em>, proving
+                            our
+                            excellence in the industry.
+                            Our courses focus on precision, creativity, and innovation, ensuring every student is
+                            prepared
+                            for success.
+                        </p>
+                        <p>
+                            <strong>We exclusively design for women</strong>, celebrating elegance and tradition in
+                            every
+                            stitch.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- <section class="courses-section">
+            <h2>Our Fashion Courses</h2>
+            <div class="courses-container">
+                <div class="course-card" *ngFor="let course of courses">
+                    <img [src]="course.image" [alt]="course.title" />
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.description }}</p>
+                    <button (click)="learnMore(course)">Learn More</button>
+                </div>
+            </div>
+        </section> -->
+
+        <section id="course" class="flex align-items-center justify-content-center">
+            <div class="section-wrapper">
+                <div class="course-content-wrapper flex justify-content-center align-items-center flex-column">
+                    <h2 class="course-section-title">Our Fashion <span>Courses</span></h2>
+
+                    <div class="courses-container flex">
+                        <div class="course-card  cursor-pointer" #courseCard *ngFor="let course of courses">
+                            <img class="course-image" [src]="course.image" [alt]="course.title" />
+                            <div class="card-text-wrapper">
+                                <h3 class="course-title">{{ course.title }}</h3>
+                                <p class="course-description">{{ course.description }}</p>
+                                <button class="button course-button" (click)="learnMore(course)">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="gallery" class="flex align-items-center justify-content-center">
+            <div class="section-wrapper">
+                <app-gallery></app-gallery>
+            </div>
+        </section>
+        <section id="designs" class="flex align-items-center justify-content-center">
+            <div class="section-wrapper">
+                <app-designs></app-designs>
+            </div>
+        </section>
+        <section id="contact" class="flex align-items-center justify-content-center">
+            <div class="section-wrapper">
+                <div class="contact-form-wrapper flex justify-content-center">
+                    <div class="contact-form" [formGroup]="form" *ngIf="!isMessageSent">
+                        <div class="contact-form-title-container flex align-items-center justify-content-center">
+                            <p class="contact-form-title"> Feel free to reach us!! </p>
+                        </div>
+
+                        <div class="flex justify-space-between input-field-wrapper">
+                            <div>
+                                <div>
+                                    <input class="text-field" type="text" placeholder="Name" formControlName="name">
+
+                                    <div
+                                        [ngClass]="getControl('name')?.invalid && getControl('name')?.touched ? 'show-error':'hide-error'">
+                                        <p class="error" *ngIf="getControl('name')?.errors?.['required']">Name is
+                                            required</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <input class="text-field" type="text" placeholder="Mobile Number"
+                                        formControlName="mobileNumber">
+
+                                    <div
+                                        [ngClass]="getControl('mobileNumber')?.invalid && getControl('mobileNumber')?.touched ? 'show-error':'hide-error'">
+                                        <p class="error" *ngIf="getControl('mobileNumber')?.errors?.['required']">Mobile
+                                            number is required
+                                        </p>
+                                        <p class="error"
+                                            *ngIf="getControl('mobileNumber')?.errors?.['pattern'] || getControl('mobileNumber')?.errors?.['minlength']">
+                                            Please enter a valid
+                                            mobile number</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <div>
+                                    <input class="text-field" type="text" placeholder="Email Address"
+                                        formControlName="emailAddress">
+
+                                    <div
+                                        [ngClass]="getControl('emailAddress')?.invalid && getControl('emailAddress')?.touched ? 'show-error':'hide-error'">
+                                        <p class="error" *ngIf="getControl('emailAddress')?.errors?.['required']">Email
+                                            is required</p>
+                                        <p class="error" *ngIf="getControl('emailAddress')?.errors?.['email']">Please
+                                            enter a valid email
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <input class="text-field" type="text" placeholder="Subject"
+                                        formControlName="subject">
+
+                                    <div
+                                        [ngClass]="getControl('subject')?.invalid && getControl('subject')?.touched ? 'show-error':'hide-error'">
+                                        <p class="error" *ngIf="getControl('subject')?.errors?.['required']">Subject is
+                                            required</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <textarea class="message-box" type="text" placeholder="Your Message"
+                                formControlName="message"></textarea>
+
+                            <div
+                                [ngClass]="getControl('message')?.invalid && getControl('message')?.touched?'show-error':'hide-error'">
+                                <p class="error" *ngIf="getControl('message')?.errors?.['required']">Message is required
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="button-container flex justify-content-center">
+                            <button class="button contact-button cursor-pointer" type="submit" (click)="onFormSubmit()">Send Message
+                                <span><i *ngIf="!isLoading" class="pi pi-send"></i><i *ngIf="isLoading"
+                                        class="pi pi-spin pi-spinner"></i></span></button>
+                        </div>
+                    </div>
+                    <div class="thanks-form flex align-items-center justify-content-center" *ngIf="isMessageSent">
+                        <p class="thanks-message">Thanks for reaching us!!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section *ngIf="!false" id="footer" class="flex align-items-center justify-content-center">
+            <div class="footer-wrapper flex align-items-center justify-content-center blur">
+                <div class="section-wrapper">
+                    <div class="address-container flex justify-space-between">
+                        <div class="address">
+                            <h2 class="shop-heading">Shop address:</h2>
+                            <p class="shop-address">64, Sathiyamoorthy St, Thirunagar, Tirunelveli Town, Tirunelveli,
+                                Tamil Nadu 627006</p>
+
+                            <div class="social-link-container flex flex-wrap justify-content-center">
+                                <div class="social-link flex cursor-pointer align-items-center"
+                                    *ngFor="let socialLink of socialLinks; let i = index" (click)="openLink(i)">
+                                    <span class="social-link-icon-wrapper">
+                                        <i class="social-link-icon" [class]="socialLink.icon"></i>
+                                    </span>
+
+                                    <p class="social-link-label">{{socialLink.label}}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="location">
+                            <h2 class="shop-heading">Shop location:</h2>
+                            <iframe class="map"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d312.9921001897148!2d77.69001135347514!3d8.729109572151412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b04117b757f351b%3A0x97ba6320cad76a86!2sAnjana%20Devi%20Fashion%20Institute!5e0!3m2!1sen!2sin!4v1740319026060!5m2!1sen!2sin"
+                                style="border:0;" allowfullscreen="true" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+
+                    </div>
+                    <div class="footer-cover w-full flex justify-content-center align-items-center flex-column">
+                        <hr class="copyrights-divider">
+                        <div class="copyrights-container">
+                            {{copyright}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- <p-scrollTop /> -->
+
+    <p-scrollTop [threshold]="100" icon="pi pi-arrow-up"></p-scrollTop>
+    <!-- <p-scrolltop [threshold]="10" icon="pi pi-arrow-up" [buttonProps]="{ severity: 'contrast', raised: true, rounded: true }" /> -->
+</div>
+<!-- <p-speeddial [model]="items" direction="down" [style]="{ position: 'absolute', left: 'calc(50% - 2rem)', top: 0 }" /> -->
